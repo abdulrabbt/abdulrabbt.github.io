@@ -23,4 +23,11 @@ function genUrl(event) {
   event.completed();
 }
 
-Office.onReady(function() {});
+Office.onReady(function() {
+Office.context.mailbox.item.notificationMessages.addAsync("subject", {
+    type: "informationalMessage",
+    icon: "Icon.16x16",
+    message: "Subject: onready",
+    persistent: false
+  });
+});
