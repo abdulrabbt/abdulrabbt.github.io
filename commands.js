@@ -33,7 +33,7 @@ function genUrl(event) {
   var url = "https://" + event.source.id + "/#" + room + "/" + password + "/";
   var cryptObt;
   // If msCrypto is present, then use it
-  if (msCrypto !== undefined) {
+  if (typeof msCrypto === 'object') {
     // NOTE: msCrypto is only supported in IE11 (+ Outlook for win)
     cryptObt = msCrypto.subtle.generateKey(
       { name: "AES-GCM", length: 128 },
