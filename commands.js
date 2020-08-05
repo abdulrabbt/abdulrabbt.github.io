@@ -13,11 +13,18 @@ function genPass(length) {
   return result;
 }
 
+async function generateKey() {
+    console.log("key");
+    var key = await crypto.subtle.generateKey({ name: "AES-GCM", length: 128 }, true, ["encrypt", "decrypt"]);
+    var key_exported = await crypto.subtle.exportKey("jwk", key);
+    return key_exported.k;
+  };
+
 console.log("test")
-function genUrl(event) {
+async function genUrl(event) {
   var room = genPass(8);
   var password = genPass(14);
-  var encryptionKey = "tlyYLfRxK1YPXaChLQAcPQ"; // await generateKey();
+  var encryptionKey = await generateKey(); //"tlyYLfRxK1YPXaChLQAcPQ";
   var url = "https://" + event.source.id + "/#" + room + "/" + password + "/" + encryptionKey;
 
   Office.context.mailbox.displayNewAppointmentForm({
