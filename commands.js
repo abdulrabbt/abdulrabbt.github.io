@@ -39,12 +39,12 @@ function generateKeyIE() {
   return key_exported.k;
 }
 
-
+console.log("test")
 function genUrl(event) {
   var room = genPass(8);
   var password = genPass(14);
-//   var encryptionKey = "tlyYLfRxK1YPXaChLQAcPQ"; // await generateKey();
-  var encryptionKey = generateKey();
+  var encryptionKey = "tlyYLfRxK1YPXaChLQAcPQ"; // await generateKey();
+//   var encryptionKey = generateKey();
   var url = "https://" + event.source.id + "/#" + room + "/" + password + "/" + encryptionKey;
 
   Office.context.mailbox.displayNewAppointmentForm({
