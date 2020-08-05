@@ -69,14 +69,15 @@ function genUrl(event) {
       .then((e) => {
         console.log("cryptObt.oncomplete");
         console.log(e);
-        return crypto.subtle.exportKey("jwk", e.target.result);
+        return crypto.subtle.exportKey("jwk", e);
       })
       .then((e2) => {
         console.log("from oncomplete", e2);
         console.log("ob.oncomplete");
         console.log(e2);
-        var result = e2.target.result;
-        var k = JSON.parse(arrayBufferToString(result)).k;
+//         var result = e2.target.result;
+//         var k = JSON.parse(arrayBufferToString(result)).k;
+        var k = e2.k;
         var currentEmail = Office.context.mailbox.userProfile.emailAddress;
         Office.context.mailbox.displayNewAppointmentForm({
           requiredAttendees: [currentEmail],
