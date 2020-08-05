@@ -55,4 +55,4 @@ function genUrl(event) {
   event.completed();
 }
 
-Office.onReady(function() {});
+Office.onReady(function(info) {console.log(info)});
