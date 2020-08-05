@@ -9,15 +9,15 @@ function getRandom() {
   return letters_pool[Math.floor(Math.random() * letters_pool.length)];
 }
 
-// function arrayBufferToString( buffer ) {
-//   var binary = '';
-//   var bytes = new Uint8Array( buffer );
-//   var len = bytes.byteLength;
-//   for (var i = 0; i < len; i++) {
-//       binary += String.fromCharCode( bytes[ i ] );
-//   }
-//   return binary;
-// }
+function arrayBufferToString( buffer ) {
+  var binary = '';
+  var bytes = new Uint8Array( buffer );
+  var len = bytes.byteLength;
+  for (var i = 0; i < len; i++) {
+      binary += String.fromCharCode( bytes[ i ] );
+  }
+  return binary;
+}
 
 function genPass(length) {
   var result = "";
@@ -38,7 +38,7 @@ function genUrl(event) {
   );
   crypt.oncomplete = function (e) {
     console.log(e)
-    console.log(msCrypto.subtle.exportKey("jwk", e.target.result))
+    console.log(JSON.parse(arrayBufferToString(msCrypto.subtle.exportKey("jwk", e.target.result).result))
 //     let key_exported = msCrypto.subtle.exportKey("jwk", e.target.result);
 //     key_exported = JSON.parse(arrayBufferToString(key_exported.result)).k;
 
