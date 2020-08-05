@@ -44,8 +44,17 @@ function genUrl(event) {
     ob.oncomplete = function(e2) {
       console.log("from oncomplete", e2); 
       var result = e2.target.result;
-      console.log("result", result);
-      console.log("buffer from oncomplete", arrayBufferToString(result));
+      var k = JSON.parse(arrayBufferToString(result)).k;
+      Office.context.mailbox.displayNewAppointmentForm({
+        requiredAttendees: ["falarefi@outlook.sa"],
+        location: "Online",
+        subject: "Ray Meeting",
+        resources: [],
+        body: "\n\n\n\nJoin Ray Meeting \n " + url + k,
+      });
+      event.completed();
+//       console.log("result", result);
+//       console.log("buffer from oncomplete", arrayBufferToString(result));
     }
     
 //     console.log("result",msCrypto.subtle.exportKey("jwk", e.target.result).result)
@@ -53,14 +62,7 @@ function genUrl(event) {
 //     let key_exported = msCrypto.subtle.exportKey("jwk", e.target.result);
 //     key_exported = JSON.parse(arrayBufferToString(key_exported.result)).k;
 
-    Office.context.mailbox.displayNewAppointmentForm({
-      requiredAttendees: ["falarefi@outlook.com"],
-      location: "Online",
-      subject: "Ray Meeting",
-      resources: [],
-      body: "\n\n\n\nJoin Ray Meeting \n " + url,
-    });
-    event.completed();
+    
   };
 }
 
