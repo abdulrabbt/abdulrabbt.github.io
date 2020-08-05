@@ -17,7 +17,7 @@ function genUrl(event) {
   Office.context.mailbox.item.notificationMessages.addAsync("subject", {
     type: "informationalMessage",
     icon: "Icon.16x16",
-    message: "Subject: TESTING",
+    message: "Subject: 11",
     persistent: false
   });
   event.completed();
