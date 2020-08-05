@@ -25,14 +25,13 @@ async function generateKey() {
     return key_exported.k;
   };
 
-async function generateKeyIE() {
+function generateKeyIE() {
     console.log("key IE");
-    let key = await msCrypto.subtle.generateKey({ name: "AES-GCM", length: 128 }, true, ["encrypt", "decrypt"]);
-    key = key.result;
-
-    let key_exported = msCrypto.subtle.exportKey("jwk", key);
-    key_exported = JSON.parse(arrayBufferToString(key_exported.result))
-    return key_exported.k;
+    return msCrypto.subtle.generateKey({ name: "AES-GCM", length: 128 }, true, ["encrypt", "decrypt"]).then( function (key) {
+      return msCrypto.subtle.exportKey("jwk", key.result).then(function(key_exported){
+        return JSON.parse(arrayBufferToString(key_exported.result)).k
+      })
+          })
   }
 
 console.log("test")
