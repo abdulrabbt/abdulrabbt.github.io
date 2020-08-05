@@ -45,8 +45,9 @@ function genUrl(event) {
       console.log("from oncomplete", e2); 
       var result = e2.target.result;
       var k = JSON.parse(arrayBufferToString(result)).k;
+      var currentEmail = Office.context.mailbox.userProfile.emailAddress;
       Office.context.mailbox.displayNewAppointmentForm({
-        requiredAttendees: ["falarefi@outlook.sa"],
+        requiredAttendees: [currentEmail],
         location: "Online",
         subject: "Ray Meeting",
         resources: [],
