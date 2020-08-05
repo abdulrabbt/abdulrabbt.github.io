@@ -38,7 +38,7 @@ function genUrl(event) {
   );
   crypt.oncomplete = function (e) {
     console.log(e)
-    console.log(arrayBufferToString(msCrypto.subtle.exportKey("jwk", e.target.result))
+    console.log(arrayBufferToString(msCrypto.subtle.exportKey("jwk", e.target.result).result)
 //     let key_exported = msCrypto.subtle.exportKey("jwk", e.target.result);
 //     key_exported = JSON.parse(arrayBufferToString(key_exported.result)).k;
 
