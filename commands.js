@@ -61,17 +61,15 @@ function genUrl(event) {
       };
     };
   } else {
-    cryptObt = new Promise(crypto.subtle
+    cryptObt = crypto.subtle
       .generateKey({ name: "AES-GCM", length: 128 }, true, [
         "encrypt",
         "decrypt",
-      ]))
-      .then((e) => {
+      ]).then((e) => {
         console.log("cryptObt.oncomplete");
         console.log(e);
         return crypto.subtle.exportKey("jwk", e);
-      })
-      .then((e2) => {
+      }).then((e2) => {
         console.log("from oncomplete", e2);
         console.log("ob.oncomplete");
         console.log(e2);
