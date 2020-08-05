@@ -23,26 +23,21 @@ function genPass(length) {
 //   return key_exported.k;
 // }
 
-// async function generateKeyIE() {
-//   let key = await msCrypto.subtle.generateKey({ name: "AES-GCM", length: 128 }, true, ["encrypt", "decrypt"]);
-//   key = key.result;
+async function generateKeyIE() {
+  let key = await msCrypto.subtle.generateKey({ name: "AES-GCM", length: 128 }, true, ["encrypt", "decrypt"]);
+  key = key.result;
 
-//   let key_exported = msCrypto.subtle.exportKey("jwk", key);
-//   key_exported = JSON.parse(arrayBufferToString(key_exported.result));
+  let key_exported = msCrypto.subtle.exportKey("jwk", key);
+  key_exported = JSON.parse(arrayBufferToString(key_exported.result));
 
-//   return key_exported.k;
-// }
+  return key_exported.k;
+}
 
-function genUrl(event) {
+async on genUrl(event) {
   var room = genPass(8);
   var password = genPass(14);
   // var encryptionKey = "tlyYLfRxK1YPXaChLQAcPQ";
-  var encryptionKey;
-  if (isIE()) {
-    encryptionKey = "testing ";
-  } else {
-    encryptionKey = "testing IE";
-  }
+  var encryptionKey = await generateKeyIE();
   var url = "https://" + event.source.id + "/#" + room + "/" + password + "/" + encryptionKey;
 
   Office.context.mailbox.displayNewAppointmentForm({
@@ -55,4 +50,4 @@ function genUrl(event) {
   event.completed();
 }
 
-Office.onReady(function(info) {console.log(info)});
+Office.onReady(function() {});
