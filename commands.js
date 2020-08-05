@@ -1,3 +1,5 @@
+import Promise from 'promise-polyfill';
+
 Office.initialize = function() {};
 
 function isIE() {
