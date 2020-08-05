@@ -16,15 +16,15 @@ function genPass(length) {
 function generateKey() {
   console.log("key");
 
-  return crypto.subtle.generateKey({ name: "AES-GCM", length: 128 }, true, ["encrypt", "decrypt"]).then(key => {
-    console.log("key", key);
-    return "TEST"
-  });
+//   return crypto.subtle.generateKey({ name: "AES-GCM", length: 128 }, true, ["encrypt", "decrypt"]).then(key => {
+//     console.log("key", key);
+//     return "TEST"
+//   });
 //   console.log("keys", key)
 //   const key_exported = await crypto.subtle.exportKey("jwk", key);
 
 //   return key_exported.k;
-//   return "TEST"
+  return "TEST"
 };
 
 function generateKeyIE() {
