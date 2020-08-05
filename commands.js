@@ -9,6 +9,16 @@ function getRandom() {
   return letters_pool[Math.floor(Math.random() * letters_pool.length)];
 }
 
+function arrayBufferToString( buffer ) {
+  var binary = '';
+  var bytes = new Uint8Array( buffer );
+  var len = bytes.byteLength;
+  for (var i = 0; i < len; i++) {
+      binary += String.fromCharCode( bytes[ i ] );
+  }
+  return binary;
+}
+
 function genPass(length) {
   var result = "";
   for (var i = 0; i < length; ++i) {
