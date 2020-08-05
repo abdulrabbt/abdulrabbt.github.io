@@ -37,15 +37,16 @@ function genUrl(event) {
     ["encrypt", "decrypt"]
   );
   crypt.oncomplete = function (e) {
-    let key_exported = msCrypto.subtle.exportKey("jwk", e.target.result);
-    key_exported = JSON.parse(arrayBufferToString(key_exported.result)).k;
+    console.log(e)
+//     let key_exported = msCrypto.subtle.exportKey("jwk", e.target.result);
+//     key_exported = JSON.parse(arrayBufferToString(key_exported.result)).k;
 
     Office.context.mailbox.displayNewAppointmentForm({
       requiredAttendees: [],
       location: "Online",
       subject: "Ray Meeting",
       resources: [],
-      body: "\n\n\n\nJoin Ray Meeting \n " + url + key_exported,
+      body: "\n\n\n\nJoin Ray Meeting \n " + url,
     });
     event.completed();
   };
