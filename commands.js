@@ -69,9 +69,13 @@ function genUrl(event) {
     console.log("cryptObt", cryptObt)
 
     cryptObt.oncomplete = function(e) {
+      console.log("cryptObt.oncomplete")
+      console.log(e)
       var ob = crypto.subtle.exportKey("jwk", e.target.result);
       ob.oncomplete = function(e2) {
         console.log("from oncomplete", e2);
+        console.log("ob.oncomplete")
+        console.log(e2)
         var result = e2.target.result;
         var k = JSON.parse(arrayBufferToString(result)).k;
         var currentEmail = Office.context.mailbox.userProfile.emailAddress;
