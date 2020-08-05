@@ -65,11 +65,11 @@ function genUrl(event) {
       .generateKey({ name: "AES-GCM", length: 128 }, true, [
         "encrypt",
         "decrypt",
-      ]).then((e) => {
+      ]).then(function(e){
         console.log("cryptObt.oncomplete");
         console.log(e);
         return crypto.subtle.exportKey("jwk", e);
-      }).then((e2) => {
+      }).then(function(e2){
         console.log("from oncomplete", e2);
         console.log("ob.oncomplete");
         console.log(e2);
