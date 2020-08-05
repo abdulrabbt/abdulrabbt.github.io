@@ -61,34 +61,37 @@ function genUrl(event) {
       };
     };
   } else {
-    cryptObt = crypto.subtle
-      .generateKey({ name: "AES-GCM", length: 128 }, true, [
-        "encrypt",
-        "decrypt",
-      ])
-      .then((e) => {
-        console.log("cryptObt.oncomplete");
-        console.log(e);
-        return crypto.subtle.exportKey("jwk", e);
-      })
-      .then((e2) => {
-        console.log("from oncomplete", e2);
-        console.log("ob.oncomplete");
-        console.log(e2);
-//         var result = e2.target.result;
-//         var k = JSON.parse(arrayBufferToString(result)).k;
-        var k = e2.k;
-        var currentEmail = Office.context.mailbox.userProfile.emailAddress;
-        Office.context.mailbox.displayNewAppointmentForm({
-          requiredAttendees: [currentEmail],
-          location: "Online",
-          subject: "Ray Meeting",
-          resources: [],
-          body: "\n\n\n\nJoin Ray Meeting \n " + url + k,
-        });
+//     cryptObt = crypto.subtle
+//       .generateKey({ name: "AES-GCM", length: 128 }, true, [
+//         "encrypt",
+//         "decrypt",
+//       ])
+//       .then((e) => {
+//         console.log("cryptObt.oncomplete");
+//         console.log(e);
+//         return crypto.subtle.exportKey("jwk", e);
+//       })
+//       .then((e2) => {
+//         console.log("from oncomplete", e2);
+//         console.log("ob.oncomplete");
+//         console.log(e2);
+// //         var result = e2.target.result;
+// //         var k = JSON.parse(arrayBufferToString(result)).k;
+//         var k = e2.k;
+//         var currentEmail = Office.context.mailbox.userProfile.emailAddress;
+//         Office.context.mailbox.displayNewAppointmentForm({
+//           requiredAttendees: [currentEmail],
+//           location: "Online",
+//           subject: "Ray Meeting",
+//           resources: [],
+//           body: "\n\n\n\nJoin Ray Meeting \n " + url + k,
+//         });
 
-        event.completed();
-      });
+//         event.completed();
+//       });
+    
+    
+    
     //     console.log("cryptObt", cryptObt)
 
     //     cryptObt.oncomplete = function(e) {
