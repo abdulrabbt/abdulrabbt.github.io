@@ -1,8 +1,8 @@
 Office.initialize = function() {};
 
-// function isIE() {
-//   return document.documentMode;
-// }
+function isIE() {
+  return typeof msCrypto === 'object';
+}
 
 function getRandom() {
   var letters_pool = "23456789ABCDEFGHJKLMNPQRST";
@@ -32,8 +32,9 @@ function genUrl(event) {
   var password = genPass(14);
   var url = "https://" + event.source.id + "/#" + room + "/" + password + "/";
   var cryptObt;
+  console.log("isIE", isIE())
   // If msCrypto is present, then use it
-  if (typeof msCrypto === 'object') {
+  if (isIE()) {
     // NOTE: msCrypto is only supported in IE11 (+ Outlook for win)
     cryptObt = msCrypto.subtle.generateKey(
       { name: "AES-GCM", length: 128 },
@@ -65,6 +66,7 @@ function genUrl(event) {
       true,
       ["encrypt", "decrypt"]
     );
+    console.log("cryptObt", cryptObt)
 
     cryptObt.oncomplete = function(e) {
       var ob = crypto.subtle.exportKey("jwk", e.target.result);
