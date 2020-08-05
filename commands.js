@@ -1,4 +1,4 @@
-Office.initialize = function() {};
+Office.initialize = function () {};
 
 function isIE() {
   return document.documentMode;
@@ -17,37 +17,25 @@ function genPass(length) {
   return result;
 }
 
-// async function generateKey() {
-//   var key = await crypto.subtle.generateKey({ name: "AES-GCM", length: 128 }, true, ["encrypt", "decrypt"]);
-//   var key_exported = await crypto.subtle.exportKey("jwk", key);
-//   return key_exported.k;
-// }
-
-async function generateKeyIE() {
-  let key = await msCrypto.subtle.generateKey({ name: "AES-GCM", length: 128 }, true, ["encrypt", "decrypt"]);
-  key = key.result;
-
-  let key_exported = msCrypto.subtle.exportKey("jwk", key);
-  key_exported = JSON.parse(arrayBufferToString(key_exported.result));
-
-  return key_exported.k;
-}
-
-async on genUrl(event) {
+function genUrl(event) {
   var room = genPass(8);
   var password = genPass(14);
-  // var encryptionKey = "tlyYLfRxK1YPXaChLQAcPQ";
-  var encryptionKey = await generateKeyIE();
-  var url = "https://" + event.source.id + "/#" + room + "/" + password + "/" + encryptionKey;
+  var url = "https://" + event.source.id + "/#" + room + "/" + password + "/";
+  msCrypto.subtle
+    .generateKey({ name: "AES-GCM", length: 128 }, true, ["encrypt", "decrypt"])
+    .then(function (key) {
+      let key_exported = msCrypto.subtle.exportKey("jwk", key);
+      key_exported = JSON.parse(arrayBufferToString(key_exported.result)).k;
 
-  Office.context.mailbox.displayNewAppointmentForm({
-    requiredAttendees: [],
-    location: "Online",
-    subject: "Ray Meeting",
-    resources: [],
-    body: "\n\n\n\nJoin Ray Meeting \n " + url
-  });
-  event.completed();
+      Office.context.mailbox.displayNewAppointmentForm({
+        requiredAttendees: [],
+        location: "Online",
+        subject: "Ray Meeting",
+        resources: [],
+        body: "\n\n\n\nJoin Ray Meeting \n " + url + key_exported,
+      });
+      event.completed();
+    });
 }
 
-Office.onReady(function() {});
+Office.onReady(function () {});
