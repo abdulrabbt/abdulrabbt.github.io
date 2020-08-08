@@ -57,15 +57,16 @@ function callback(domain, room, password, encryption, event) {
     resources: [],
     start: startTime,
     end: endTime,
+    // NOTE: web only supports HTML (\n doesn't work), desktop doesn't supports HTML (\n works, while <br /> doesn't)
     body:
-      "<br /><br />-- Do not delete or change any of the following text. -- " +
-      "\n\nTo join the meeting, check the info and link below: \n" +
+      "\r\r-- Do not delete or change any of the following text. -- " +
+      "\r\rTo join the meeting, check the info and link below: \n" +
       url +
       "\n\nMeeting ID (access code): " +
       room +
-      " \n\nMeeting password: " +
+      "\n\nMeeting password: " +
       password +
-      " \n\nMeeting encryption: " +
+      "\n\nMeeting encryption: " +
       encryption +
       "\n\nThis meeting is powered by Meet.sa (a SITE product).",
   });
