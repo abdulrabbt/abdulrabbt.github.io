@@ -62,13 +62,13 @@ function callback(domain, room, password, encryption, event) {
       "\n\nTo join the meeting, check the info and link below: " +
       "\n\nMeeting ID (access code): " +
       room +
-      "\n\nMeeting password: " +
+      " \n\nMeeting password: " +
       password +
-      "\n\nMeeting encryption: " +
+      " \n\nMeeting encryption: " +
       encryption +
-      "\n\n\n\nJoin the meeting: " +
+      " \n\n\n\nJoin the meeting: " +
       url +
-      "\n\nThis meeting is powered by Meet.sa (a SITE product).",
+      " \n\nThis meeting is powered by Meet.sa (a SITE product).",
   });
 
   event.completed();
