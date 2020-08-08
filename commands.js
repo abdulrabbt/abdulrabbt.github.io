@@ -47,7 +47,7 @@ function callback(domain, room, password, encryption, event) {
   // set the starting date to be beginning of next hour
   // ends a half hour after
   var startTime = roundToHour(new Date());
-  var endTime = new Date(start);
+  var endTime = new Date(startTime);
   end.setMinutes(end.getMinutes() + 30);
 
   Office.context.mailbox.displayNewAppointmentForm({
