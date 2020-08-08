@@ -58,17 +58,16 @@ function callback(domain, room, password, encryption, event) {
     start: startTime,
     end: endTime,
     body:
-      "\n\n\n\n-- Do not delete or change any of the following text. -- " +
-      "\n\nTo join the meeting, check the info and link below: " +
+      "<br /><br />-- Do not delete or change any of the following text. -- " +
+      "\n\nTo join the meeting, check the info and link below: \n" +
+      url +
       "\n\nMeeting ID (access code): " +
       room +
       " \n\nMeeting password: " +
       password +
       " \n\nMeeting encryption: " +
       encryption +
-      " \n\n\n\nJoin the meeting: " +
-      url +
-      " \n\nThis meeting is powered by Meet.sa (a SITE product).",
+      "\n\nThis meeting is powered by Meet.sa (a SITE product).",
   });
 
   event.completed();
