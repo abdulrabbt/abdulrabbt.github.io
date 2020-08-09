@@ -51,9 +51,7 @@ function callback(domain, room, password, encryption, event) {
   endTime.setMinutes(endTime.getMinutes() + 30);
 
   // if desktop use <br /> otherwise use /n
-  var platform = Office.context.host.platform;
-  console.log(Office.context);
-  console.log(Office.context.host);
+  var platform = Office.context.platform;
   console.log("platform", platform);
   var spaceChar = "\n";
   if (platform === "OfficeOnline") {
