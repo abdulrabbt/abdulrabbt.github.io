@@ -50,6 +50,13 @@ function callback(domain, room, password, encryption, event) {
   var endTime = new Date(startTime);
   endTime.setMinutes(endTime.getMinutes() + 30);
 
+  // if desktop use <br /> otherwise use /n
+  var platform = Office.context.host.platform;
+  var spaceChar = "\n";
+  if (platform === "OfficeOnline") {
+    spaceChar = "<br />";
+  }
+
   Office.context.mailbox.displayNewAppointmentForm({
     requiredAttendees: [currentEmail],
     location: "Online",
@@ -59,23 +66,34 @@ function callback(domain, room, password, encryption, event) {
     end: endTime,
     // NOTE: web only supports HTML (\n doesn't work), desktop doesn't supports HTML (\n works, while <br /> doesn't)
     body:
-      "\r\r-- Do not delete or change any of the following text. -- " +
-      "\r\rTo join the meeting, check the info and link below: \n" +
+      spaceChar +
+      spaceChar +
+      "-- Do not delete or change any of the following text. -- " +
+      spaceChar +
+      spaceChar +
+      "To join the meeting, follow the link and info below: \n" +
       url +
-      "\n\nMeeting ID (access code): " +
+      spaceChar +
+      spaceChar +
+      "Meeting ID (access code): " +
       room +
-      "\n\nMeeting password: " +
+      spaceChar +
+      spaceChar +
+      "Meeting password: " +
       password +
-      "\n\nMeeting encryption: " +
+      spaceChar +
+      spaceChar +
+      "Meeting encryption: " +
       encryption +
-      "\n\nThis meeting is powered by Meet.sa (a SITE product).",
+      spaceChar +
+      spaceChar +
+      "This meeting is powered by Meet.sa (a SITE product).",
   });
 
   event.completed();
 }
 
 function genUrl(event) {
-  console.log(event);
   var room = genPass(8);
   var password = genPass(14);
   var domain = event.source.id;
@@ -117,4 +135,4 @@ function genUrl(event) {
   }
 }
 
-Office.onReady(function() {});
+Office.onReady(function(info) {});
