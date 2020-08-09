@@ -52,6 +52,7 @@ function callback(domain, room, password, encryption, event) {
 
   // if desktop use <br /> otherwise use /n
   var platform = Office.context.host.platform;
+  console.log("platform, platform);
   var spaceChar = "\n";
   if (platform === "OfficeOnline") {
     spaceChar = "<br />";
@@ -65,7 +66,7 @@ function callback(domain, room, password, encryption, event) {
     start: startTime,
     end: endTime,
     // NOTE: web only supports HTML (\n doesn't work), desktop doesn't supports HTML (\n works, while <br /> doesn't)
-    body:
+    body: platform +
       spaceChar +
       spaceChar +
       "-- Do not delete or change any of the following text. -- " +
