@@ -43,6 +43,7 @@ function constructURL(domain, room, password, encryption) {
 function callback(domain, room, password, encryption, event) {
   var currentEmail = Office.context.mailbox.userProfile.emailAddress;
   var url = constructURL(domain, room, password, encryption);
+  var meetUrl = "https://meet.sa/";
 
   // set the starting date to be beginning of next hour
   // ends a half hour after
@@ -52,10 +53,9 @@ function callback(domain, room, password, encryption, event) {
 
   // if desktop use <br /> otherwise use /n
   var platform = Office.context.platform;
-  console.log("platform", platform);
-  var spaceChar = "\n";
+  var nlC = "\n"; // new line char
   if (platform === "OfficeOnline") {
-    spaceChar = "<br />";
+    nlC = "<br />";
   }
 
   Office.context.mailbox.displayNewAppointmentForm({
@@ -66,29 +66,32 @@ function callback(domain, room, password, encryption, event) {
     start: startTime,
     end: endTime,
     // NOTE: web only supports HTML (\n doesn't work), desktop doesn't supports HTML (\n works, while <br /> doesn't)
-    body: platform +
-      spaceChar +
-      spaceChar +
+    body:
+      nlC +
+      nlC +
       "-- Do not delete or change any of the following text. -- " +
-      spaceChar +
-      spaceChar +
-      "To join the meeting, follow the link and info below: \n" +
+      nlC +
+      nlC +
+      "To join the meeting, follow the link and info below:" +
+      nlC +
       url +
-      spaceChar +
-      spaceChar +
+      nlC +
+      nlC +
       "Meeting ID (access code): " +
       room +
-      spaceChar +
-      spaceChar +
+      nlC +
+      nlC +
       "Meeting password: " +
       password +
-      spaceChar +
-      spaceChar +
+      nlC +
+      nlC +
       "Meeting encryption: " +
       encryption +
-      spaceChar +
-      spaceChar +
-      "This meeting is powered by Meet.sa (a SITE product).",
+      nlC +
+      nlC +
+      "This meeting is powered by Meet.sa (a SITE product)." +
+      nlC +
+      meetUrl,
   });
 
   event.completed();
@@ -136,4 +139,4 @@ function genUrl(event) {
   }
 }
 
-Office.onReady(function(info) {});
+Office.onReady(function() {});
