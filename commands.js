@@ -53,7 +53,9 @@ function callback(domain, room, password, encryption, event) {
 
   // if desktop use <br /> otherwise use /n
   var platform = Office.context.platform;
-  var nlC = "\n"; // new line char
+  //var nlC = "\n"; // new line char
+  console.log("Office.context", Office.context);
+  var nlC = "<br />"
   if (platform === "OfficeOnline") {
     nlC = "<br />";
   }
