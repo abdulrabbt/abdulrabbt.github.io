@@ -53,11 +53,11 @@ function callback(domain, room, password, encryption, event) {
 
   // if desktop use <br /> otherwise use /n
   var platform = Office.context.platform;
-  //var nlC = "\n"; // new line char
-  console.log("Office.context", Office.context);
-  var nlC = "<br />"
-  if (platform === "OfficeOnline") {
+  var nlC = "\n"; // new line char
+  if (platform === "OfficeOnline" || platform === "Mac") {
     nlC = "<br />";
+    url = '<a href="' + url + '">' + url + "</a>";
+    meetUrl = '<a href="' + meetUrl + '">' + meetUrl + "</a>";
   }
 
   Office.context.mailbox.displayNewAppointmentForm({
