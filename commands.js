@@ -73,7 +73,7 @@ function callback(domain, room, password, encryption, event) {
     end: endTime,
     // NOTE: web only supports HTML (\n doesn't work), desktop doesn't supports HTML (\n works, while <br /> doesn't)
     body:
-      "test 2 platform: " + platform +
+      "test 3 platform: " + platform +
       nlC +
       nlC +
       "-- Do not delete or change any of the following text. -- " +
