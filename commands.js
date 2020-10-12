@@ -1,4 +1,4 @@
-// Office.initialize = function() {};
+Office.initialize = function() {};
 
 function isIE() {
   return typeof msCrypto === "object";
@@ -54,7 +54,7 @@ function callback(domain, room, password, encryption, event) {
   // if desktop use <br /> otherwise use /n
   var platform = Office.context.platform;
   var nlC = "\n"; // new line char
-  if (platform === "OfficeOnline" || platform === "Mac") {
+  if (platform === "OfficeOnline") {
     nlC = "<br />";
     url = '<a href="' + url + '">' + url + "</a>";
     meetUrl = '<a href="' + meetUrl + '">' + meetUrl + "</a>";
@@ -142,4 +142,4 @@ function genUrl(event) {
   }
 }
 
-// Office.onReady(function() {});
+Office.onReady(function() {});
