@@ -59,6 +59,10 @@ function callback(domain, room, password, encryption, event) {
     url = '<a href="' + url + '">' + url + "</a>";
     meetUrl = '<a href="' + meetUrl + '">' + meetUrl + "</a>";
   }
+  
+  if (platform === "Mac") {
+    nlC = "\r\n";
+  }
 
   Office.context.mailbox.displayNewAppointmentForm({
     requiredAttendees: [currentEmail],
