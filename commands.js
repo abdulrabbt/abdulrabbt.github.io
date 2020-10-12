@@ -1,4 +1,4 @@
-Office.initialize = function() {};
+// Office.initialize = function() {};
 
 function isIE() {
   return typeof msCrypto === "object";
@@ -142,4 +142,4 @@ function genUrl(event) {
   }
 }
 
-Office.onReady(function() {});
+// Office.onReady(function() {});
