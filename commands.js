@@ -1,4 +1,4 @@
-Office.initialize = function() {};
+// Office.initialize = function() {};
 
 function isIE() {
   return typeof msCrypto === "object";
@@ -69,7 +69,7 @@ function callback(domain, room, password, encryption, event) {
     end: endTime,
     // NOTE: web only supports HTML (\n doesn't work), desktop doesn't supports HTML (\n works, while <br /> doesn't)
     body:
-      "test platform: " + platform +
+      "test 2 platform: " + platform +
       nlC +
       nlC +
       "-- Do not delete or change any of the following text. -- " +
@@ -142,4 +142,4 @@ function genUrl(event) {
   }
 }
 
-Office.onReady(function() {});
+// Office.onReady(function() {});
