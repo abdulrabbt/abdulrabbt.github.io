@@ -1,4 +1,4 @@
-Office.initialize = function() {};
+Office.initialize = function () {};
 
 function isIE() {
   return typeof msCrypto === "object";
@@ -44,7 +44,7 @@ function callback(domain, room, password, encryption, event) {
   var currentEmail = Office.context.mailbox.userProfile.emailAddress;
   var url = constructURL(domain, room, password, encryption);
   var meetUrl = "https://meet.sa/";
-
+  let isRestricted = domain == "site-internal.meet.sa";
   // set the starting date to be beginning of next hour
   // ends a half hour after
   var startTime = roundToHour(new Date());
@@ -59,53 +59,88 @@ function callback(domain, room, password, encryption, event) {
     url = '<a href="' + url + '">' + url + "</a>";
     meetUrl = '<a href="' + meetUrl + '">' + meetUrl + "</a>";
   }
-  
+  let body =
+    nlC +
+    nlC +
+    "-- Do not delete or change any of the following text. -- " +
+    nlC +
+    nlC +
+    "To join the meeting, follow the link and info below:" +
+    nlC +
+    url +
+    nlC +
+    (isRestricted
+      ? nlC + "Note: VPN or Company's internal network is required"
+      : "") +
+    nlC +
+    "Meeting ID (access code): " +
+    room +
+    nlC +
+    nlC +
+    "Meeting password: " +
+    password +
+    nlC +
+    nlC +
+    "Meeting encryption: " +
+    encryption +
+    nlC +
+    nlC +
+    "This meeting is powered by Meet.sa. For any inquiries, please contact support@meet.sa" +
+    nlC +
+    meetUrl;
+
   if (platform === "Mac") {
     nlC = "\r\n";
+    body = "To join the meeting, please follow this link: " + url;
   }
 
-  Office.context.mailbox.displayNewAppointmentForm({
-    requiredAttendees: [currentEmail],
-    location: "Online",
-    subject: "",
-    resources: [],
-    start: startTime,
-    end: endTime,
-    // NOTE: web only supports HTML (\n doesn't work), desktop doesn't supports HTML (\n works, while <br /> doesn't)
-    body:
-      "test 3 platform: " + platform +
-      nlC +
-      nlC +
-      "-- Do not delete or change any of the following text. -- " +
-      nlC +
-      nlC +
-      "To join the meeting, follow the link and info below:" +
-      nlC +
-      url +
-      nlC +
-      nlC +
-      "Meeting ID (access code): " +
-      room +
-      nlC +
-      nlC +
-      "Meeting password: " +
-      password +
-      nlC +
-      nlC +
-      "Meeting encryption: " +
-      encryption +
-      nlC +
-      nlC +
-      "This meeting is powered by Meet.sa (a SITE product)." +
-      nlC +
-      meetUrl,
-  });
+  const showApptForm = () => {
+    Office.context.mailbox.displayNewAppointmentForm({
+      requiredAttendees: [currentEmail],
+      location: "Online",
+      subject: "",
+      resources: [],
+      start: startTime,
+      end: endTime,
+      // NOTE: web only supports HTML (\n doesn't work), desktop doesn't supports HTML (\n works, while <br /> doesn't)
+      body: body,
+    });
+  };
 
-  event.completed();
+  if (isRestricted) {
+    var dialog;
+    Office.context.ui.displayDialogAsync(
+      "/dialog.html",
+      { height: 25, width: 30 },
+      function (asyncResult) {
+        if (asyncResult.status != "failed") {
+          // In addition to general system errors, there are 3 specific errors for
+          // displayDialogAsync that you can handle individually.
+          // https://github.com/OfficeDev/Office-Add-in-Dialog-API-Simple-Example/blob/master/SimpleDialogSampleWeb/DialogHelper.js
+          dialog = asyncResult.value;
+          dialog.addEventHandler(
+            Office.EventType.DialogMessageReceived,
+            (arg) => {
+              if (arg.message == "yes") {
+                showApptForm();
+              }
+              event.completed();
+            }
+          );
+          dialog.addEventHandler(Office.EventType.DialogEventReceived, () =>
+            event.completed()
+          );
+        }
+      }
+    );
+  } else {
+    showApptForm();
+    event.completed();
+  }
 }
 
 function genUrl(event) {
-  var room = genPass(8);
+  var room = genPass(5);
   var password = genPass(14);
   var domain = event.source.id;
   var cryptObt;
@@ -119,9 +154,9 @@ function genUrl(event) {
       ["encrypt", "decrypt"]
     );
 
-    cryptObt.oncomplete = function(e) {
+    cryptObt.oncomplete = function (e) {
       var ob = msCrypto.subtle.exportKey("jwk", e.target.result);
-      ob.oncomplete = function(e2) {
+      ob.oncomplete = function (e2) {
         var result = e2.target.result;
         var k = JSON.parse(arrayBufferToString(result)).k;
         return callback(domain, room, password, k, event);
@@ -133,10 +168,10 @@ function genUrl(event) {
         "encrypt",
         "decrypt",
       ])
-      .then(function(e) {
+      .then(function (e) {
         return crypto.subtle.exportKey("jwk", e);
       })
-      .then(function(e2) {
+      .then(function (e2) {
         var k = e2.k;
         return callback(domain, room, password, k, event);
       });
@@ -146,4 +181,4 @@ function genUrl(event) {
   }
 }
 
-Office.onReady(function() {});
+Office.onReady(function () {});
