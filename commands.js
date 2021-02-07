@@ -97,7 +97,7 @@ function callback(domain, room, password, encryption, event) {
       } follow this link: ` + url;
   }
 
-  const showApptForm = function () {
+  var showApptForm = function () {
     Office.context.mailbox.displayNewAppointmentForm({
       requiredAttendees: [currentEmail],
       location: "Online",
