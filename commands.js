@@ -97,7 +97,7 @@ function callback(domain, room, password, encryption, event) {
       } follow this link: ` + url;
   }
 
-  const showApptForm = () => {
+  const showApptForm = function () {
     Office.context.mailbox.displayNewAppointmentForm({
       requiredAttendees: [currentEmail],
       location: "Online",
@@ -123,15 +123,18 @@ function callback(domain, room, password, encryption, event) {
           dialog = asyncResult.value;
           dialog.addEventHandler(
             Office.EventType.DialogMessageReceived,
-            (arg) => {
+            function (arg) {
               if (arg.message == "yes") {
                 showApptForm();
               }
               event.completed();
             }
           );
-          dialog.addEventHandler(Office.EventType.DialogEventReceived, () =>
-            event.completed()
+          dialog.addEventHandler(
+            Office.EventType.DialogEventReceived,
+            function () {
+              event.completed();
+            }
           );
         }
       }
