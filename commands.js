@@ -44,7 +44,7 @@ function callback(domain, room, password, encryption, event) {
   var currentEmail = Office.context.mailbox.userProfile.emailAddress;
   var url = constructURL(domain, room, password, encryption);
   var meetUrl = "https://meet.sa/";
-  let isRestricted = domain == "site-internal.meet.sa";
+  var isRestricted = domain == "site-internal.meet.sa";
   // set the starting date to be beginning of next hour
   // ends a half hour after
   var startTime = roundToHour(new Date());
@@ -59,7 +59,7 @@ function callback(domain, room, password, encryption, event) {
     url = '<a href="' + url + '">' + url + "</a>";
     meetUrl = '<a href="' + meetUrl + '">' + meetUrl + "</a>";
   }
-  let body =
+  var body =
     nlC +
     nlC +
     "-- Do not delete or change any of the following text. -- " +
