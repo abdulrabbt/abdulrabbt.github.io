@@ -92,9 +92,9 @@ function callback(domain, room, password, encryption, event) {
   if (platform === "Mac") {
     nlC = "\r\n";
     body =
-      `To join the meeting, please${
-        isRestricted ? " use the company network or a VPN and " : ""
-      } follow this link: ` + url;
+      "To join the meeting, please" + isRestricted
+        ? " use the company network or a VPN and "
+        : "" + "follow this link: " + url;
   }
 
   var showApptForm = function () {
