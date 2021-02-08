@@ -27,7 +27,7 @@
     <FormSettings>
         <Form xsi:type="ItemRead">
             <DesktopSettings>
-                <SourceLocation DefaultValue="https://abdulrabbt.github.io/commands.html?v=7"/>
+                <SourceLocation DefaultValue="https://abdulrabbt.github.io/commands.html?v=8"/>
                 <RequestedHeight>250</RequestedHeight>
             </DesktopSettings>
         </Form>
@@ -66,7 +66,7 @@
                                         <Item id="site.meet.sa">
                                             <Label resid="site.meet.sa.label"/>
                                             <Supertip>
-                                                <Title resid="site.meet.sa.supertip" />
+                                                <Title resid="site.meet.sa.label" />
                                                 <Description resid="site.meet.sa.supertip" />
                                             </Supertip>
                                             <Icon>
@@ -81,7 +81,7 @@
                                         <Item id="site-internal.meet.sa">
                                             <Label resid="site-internal.meet.sa.label"/>
                                             <Supertip>
-                                                <Title resid="site-internal.meet.sa.supertip" />
+                                                <Title resid="site-internal.meet.sa.label" />
                                                 <Description resid="site-internal.meet.sa.supertip" />
                                             </Supertip>
                                             <Icon>
@@ -108,7 +108,7 @@
                 <bt:Image id="Icon.80x80" DefaultValue="https://abdulrabbt.github.io/icon-80.png"/>
             </bt:Images>
             <bt:Urls>
-                <bt:Url id="Commands.Url" DefaultValue="https://abdulrabbt.github.io/commands.html?v=7"/>
+                <bt:Url id="Commands.Url" DefaultValue="https://abdulrabbt.github.io/commands.html?v=8"/>
             </bt:Urls>
             <bt:ShortStrings>
                 <bt:String id="Meet.sa" DefaultValue="SITE Meet"/>

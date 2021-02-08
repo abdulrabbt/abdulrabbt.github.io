@@ -113,26 +113,29 @@ function callback(domain, room, password, encryption, event) {
   if (isRestricted) {
     var dialog;
     Office.context.ui.displayDialogAsync(
-      "https://meet-outlook-addin.cloud.site.sa/dialog.html",
-      { height: 25, width: 30 },
+      "https://abdulrabbt.github.io/dialog.html",
+      { height: 25, width: 30, displayInIframe: true },
       function (asyncResult) {
+        console.log({ asyncResult });
         if (asyncResult.status != "failed") {
           // In addition to general system errors, there are 3 specific errors for
           // displayDialogAsync that you can handle individually.
           // https://github.com/OfficeDev/Office-Add-in-Dialog-API-Simple-Example/blob/master/SimpleDialogSampleWeb/DialogHelper.js
-          dialog = asyncResult.value;
-          dialog.addEventHandler(
+          // dialog = asyncResult.value;
+          asyncResult.value.addEventHandler(
             Office.EventType.DialogMessageReceived,
             function (arg) {
               if (arg.message == "yes") {
                 showApptForm();
               }
+              dialog.close();
               event.completed();
             }
           );
-          dialog.addEventHandler(
+          asyncResult.value.addEventHandler(
             Office.EventType.DialogEventReceived,
             function () {
+              dialog.close();
               event.completed();
             }
           );
