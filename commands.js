@@ -115,7 +115,7 @@ function callback(domain, room, password, encryption, event) {
     var dialog;
     Office.context.ui.displayDialogAsync(
       window.location.origin + "/dialog.html",
-      { height: 25, width: 30 },
+      { height: 25, width: 30, displayInIframe: true },
       function (asyncResult) {
         if (asyncResult.status != "failed") {
           // In addition to general system errors, there are 3 specific errors for
