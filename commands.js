@@ -140,6 +140,7 @@ function callback(domain, room, password, encryption, event) {
             }
           );
         } else {
+          throw "error";
           event.completed();
         }
       }
