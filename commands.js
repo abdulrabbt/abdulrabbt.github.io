@@ -125,10 +125,10 @@ function callback(domain, room, password, encryption, event) {
             Office.EventType.DialogMessageReceived,
             function (arg) {
               dialog.close();
-              event.completed();
               if (arg.message == "yes") {
                 showApptForm();
               }
+              event.completed();
             }
           );
           dialog.addEventHandler(
