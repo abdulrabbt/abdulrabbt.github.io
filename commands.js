@@ -140,7 +140,8 @@ function callback(domain, room, password, encryption, event) {
             }
           );
         } else {
-          throw asyncResult;
+          var err = asyncResult.error;
+          throw err.name + ": " + err.message;
           event.completed();
         }
       }
