@@ -114,8 +114,8 @@ function callback(domain, room, password, encryption, event) {
   if (isRestricted) {
     var dialog;
     Office.context.ui.displayDialogAsync(
-      "https://abdulrabbt.github.io/dialog.html",
-      { height: 25, width: 30, displayInIframe: true, promptBeforeOpen: true },
+      window.location.origin + "/dialog.html",
+      { height: 25, width: 30 },
       function (asyncResult) {
         if (asyncResult.status != "failed") {
           // In addition to general system errors, there are 3 specific errors for
