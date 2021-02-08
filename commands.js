@@ -113,7 +113,7 @@ function callback(domain, room, password, encryption, event) {
   if (isRestricted) {
     var dialog;
     Office.context.ui.displayDialogAsync(
-      "/dialog.html",
+      "https://meet-outlook-addin.cloud.site.sa/dialog.html",
       { height: 25, width: 30 },
       function (asyncResult) {
         if (asyncResult.status != "failed") {
