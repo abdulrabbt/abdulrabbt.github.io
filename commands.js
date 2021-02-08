@@ -116,23 +116,22 @@ function callback(domain, room, password, encryption, event) {
       "https://abdulrabbt.github.io/dialog.html",
       { height: 25, width: 30, displayInIframe: true },
       function (asyncResult) {
-        console.log({ asyncResult });
         if (asyncResult.status != "failed") {
           // In addition to general system errors, there are 3 specific errors for
           // displayDialogAsync that you can handle individually.
           // https://github.com/OfficeDev/Office-Add-in-Dialog-API-Simple-Example/blob/master/SimpleDialogSampleWeb/DialogHelper.js
-          // dialog = asyncResult.value;
-          asyncResult.value.addEventHandler(
+          dialog = asyncResult.value;
+          dialog.addEventHandler(
             Office.EventType.DialogMessageReceived,
             function (arg) {
+              dialog.close();
+              event.completed();
               if (arg.message == "yes") {
                 showApptForm();
               }
-              dialog.close();
-              event.completed();
             }
           );
-          asyncResult.value.addEventHandler(
+          dialog.addEventHandler(
             Office.EventType.DialogEventReceived,
             function () {
               dialog.close();
