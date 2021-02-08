@@ -139,6 +139,8 @@ function callback(domain, room, password, encryption, event) {
               event.completed();
             }
           );
+        } else {
+          event.completed();
         }
       }
     );
