@@ -111,10 +111,7 @@ function callback(domain, room, password, encryption, event) {
     });
   };
 
-  if (
-    Office.RequirementSetSupport.isSetSupported("DialogApi") &&
-    isRestricted
-  ) {
+  if (Office.context.requirements.isSetSupported("DialogApi") && isRestricted) {
     var dialog;
     Office.context.ui.displayDialogAsync(
       window.location.origin + "/dialog.html",
