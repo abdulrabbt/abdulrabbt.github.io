@@ -111,7 +111,7 @@ function callback(domain, room, password, encryption, event) {
     });
   };
 
-  if (isRestricted) {
+  if (Office.context.isSetSupported("DialogApi") && isRestricted) {
     var dialog;
     Office.context.ui.displayDialogAsync(
       window.location.origin + "/dialog.html",
@@ -140,8 +140,7 @@ function callback(domain, room, password, encryption, event) {
             }
           );
         } else {
-          var err = asyncResult.error;
-          throw err.name + ": " + err.message;
+          showApptForm();
           event.completed();
         }
       }
